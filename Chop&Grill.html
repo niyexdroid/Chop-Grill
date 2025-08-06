@@ -1,0 +1,2367 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CHOPS & GRILLS ENTERPRISE</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.cdnfonts.com/css/wistia-player-inter-numbers"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #ce796b;
+        --secondary-color: #e7ad99;
+        --light-color: #ecc8af;
+        --dark-color: #a65a4a;
+      }
+
+      body {
+        background-color: var(--light-color);
+        font-family: "Inter", sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      * {
+        font-family: "WistiaPlayerInterNumbersSemiBold", "Inter", sans-serif !important;
+      }
+
+      .navbar {
+        background-color: var(--primary-color);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar-brand {
+        font-weight: bold;
+        color: white !important;
+        font-size: 1.5rem;
+      }
+
+      .card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(206, 121, 107, 0.08);
+        margin-bottom: 25px;
+        transition: transform 0.3s;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+      }
+
+      .card-header {
+        background-color: var(--secondary-color);
+        color: var(--primary-color);
+        border-radius: 15px 15px 0 0 !important;
+        font-weight: bold;
+        padding: 15px 20px;
+      }
+
+      .btn-primary,
+      .btn-success,
+      .btn-complete-order {
+        background: var(--primary-color) !important;
+        color: #fff !important;
+        border: none !important;
+      }
+
+      .btn-primary:hover,
+      .btn-success:hover,
+      .btn-complete-order:hover {
+        background: var(--secondary-color) !important;
+        color: var(--primary-color) !important;
+      }
+
+      .btn-export-excel {
+        background: var(--secondary-color) !important;
+        color: var(--primary-color) !important;
+        border: none !important;
+      }
+
+      .btn-export-excel:hover {
+        background: var(--primary-color) !important;
+        color: #fff !important;
+      }
+
+      .btn-export-pdf {
+        background: var(--primary-color) !important;
+        color: #fff !important;
+        border: none !important;
+      }
+
+      .btn-export-pdf:hover {
+        background: var(--secondary-color) !important;
+        color: var(--primary-color) !important;
+      }
+
+      .btn-view-order {
+        background: var(--secondary-color) !important;
+        color: var(--primary-color) !important;
+        border: none !important;
+      }
+
+      .btn-view-order:hover {
+        background: var(--primary-color) !important;
+        color: #fff !important;
+      }
+
+      .table {
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .table thead th {
+        background-color: var(--secondary-color);
+        color: white;
+        border: none;
+      }
+
+      .table tbody tr:hover {
+        background-color: rgba(206, 121, 107, 0.1);
+      }
+
+      .badge {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+      }
+
+      .total-section {
+        background-color: var(--light-color);
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: 15px;
+      }
+
+      .food-item {
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        background: #fff;
+        color: var(--primary-color);
+        border: 1px solid var(--secondary-color);
+      }
+
+      .food-item:hover,
+      .food-item.selected {
+        background: var(--secondary-color);
+        color: var(--primary-color);
+        border-color: var(--primary-color);
+      }
+
+      .food-category {
+        font-weight: bold;
+        color: #000000;
+        margin-top: 15px;
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+        border-bottom: 2px solid var(--light-color);
+      }
+
+      .order-item {
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        background-color: white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      }
+
+      .order-summary {
+        background-color: var(--light-color);
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: 15px;
+      }
+
+      .export-buttons {
+        display: flex;
+        gap: 10px;
+      }
+
+      .export-buttons .btn {
+        flex: 1;
+      }
+
+      .daily-order-card {
+        margin-bottom: 15px;
+        border-left: 4px solid var(--secondary-color);
+      }
+
+      .toast-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1050;
+      }
+
+      .custom-toast {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        min-width: 300px;
+      }
+
+      .toast-icon {
+        margin-right: 15px;
+        font-size: 1.5rem;
+      }
+
+      .toast-success .toast-icon {
+        color: #28a745;
+      }
+
+      .toast-error .toast-icon {
+        color: #dc3545;
+      }
+
+      .toast-info .toast-icon {
+        color: #17a2b8;
+      }
+
+      .content-wrapper {
+        flex: 1;
+      }
+
+      footer {
+        background-color: var(--primary-color);
+        color: #fff;
+        padding: 20px 0;
+        text-align: center;
+        margin-top: auto;
+      }
+
+      .discount-select,
+      .attendee-select {
+        border-radius: 8px;
+        border: 1px solid var(--secondary-color);
+        padding: 5px 10px;
+        background-color: white;
+        color: var(--primary-color);
+        font-weight: bold;
+      }
+
+      .page-section {
+        display: none;
+      }
+
+      .page-section.active {
+        display: block;
+      }
+
+      .stats-card {
+        background-color: white;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .stats-number {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: var(--primary-color);
+      }
+
+      .stats-label {
+        color: var(--secondary-color);
+        font-weight: 500;
+      }
+
+      .loading-spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s ease-in-out infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .pdf-container {
+        display: none;
+      }
+
+      .pdf-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-family: Arial, sans-serif;
+      }
+
+      .pdf-table th,
+      .pdf-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+
+      .pdf-table th {
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      .pdf-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      .pdf-header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .pdf-footer {
+        margin-top: 20px;
+        text-align: right;
+        font-weight: bold;
+      }
+
+      .food-menu-scroll {
+        max-height: 500px;
+        overflow-y: auto;
+        padding-right: 10px;
+      }
+
+      .food-menu-scroll::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .food-menu-scroll::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+      }
+
+      .food-menu-scroll::-webkit-scrollbar-thumb {
+        background: var(--secondary-color);
+        border-radius: 10px;
+      }
+
+      .food-menu-scroll::-webkit-scrollbar-thumb:hover {
+        background: var(--primary-color);
+      }
+
+      * {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <i class="bi bi-shop"></i> CHOPS & GRILLS ENTERPRISE
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          title="Toggle navigation menu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#" data-page="home"
+                ><i class="bi bi-house-door"></i> Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-page="orders"
+                ><i class="bi bi-receipt"></i> Orders</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-page="reports"
+                ><i class="bi bi-graph-up"></i> Reports</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4 content-wrapper">
+      <!-- Home Page -->
+      <div id="home-page" class="page-section active">
+        <div class="row">
+          <!-- Food Items Section -->
+          <div class="col-lg-5 mb-4">
+            <div class="card">
+              <div class="card-header">
+                <i class="bi bi-list-ul"></i> Food Menu
+              </div>
+              <div class="card-body food-menu-scroll">
+                <div class="food-category">Rice Dishes</div>
+                <div class="food-item" data-name="Jollof Rice" data-price="500">
+                  <div class="d-flex justify-content-between">
+                    <span>Jollof Rice</span>
+                    <span class="badge bg-primary">₦500</span>
+                  </div>
+                </div>
+                <div class="food-item" data-name="Fried Rice" data-price="700">
+                  <div class="d-flex justify-content-between">
+                    <span>Fried Rice</span>
+                    <span class="badge bg-primary">₦700</span>
+                  </div>
+                </div>
+                <div class="food-item" data-name="Spaghetti" data-price="500">
+                  <div class="d-flex justify-content-between">
+                    <span>Spaghetti</span>
+                    <span class="badge bg-primary">₦500</span>
+                  </div>
+                </div>
+                <div
+                  class="food-item"
+                  data-name="Basmati Rice"
+                  data-price="1000"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Basmati Rice</span>
+                    <span class="badge bg-primary">₦1,000</span>
+                  </div>
+                </div>
+                <div
+                  class="food-item"
+                  data-name="Coconut Rice"
+                  data-price="700"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Coconut Rice</span>
+                    <span class="badge bg-primary">₦700</span>
+                  </div>
+                </div>
+                <div
+                  class="food-item"
+                  data-name="White Rice & Curry Sauce"
+                  data-price="2000"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>White Rice & Curry Sauce</span>
+                    <span class="badge bg-primary">₦2,000</span>
+                  </div>
+                </div>
+                <div class="food-item" data-name="Asun Rice" data-price="1000">
+                  <div class="d-flex justify-content-between">
+                    <span>Asun Rice</span>
+                    <span class="badge bg-primary">₦1,000</span>
+                  </div>
+                </div>
+
+                <div
+                  class="food-item"
+                  data-name="Potatoe Chips"
+                  data-price="500"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Potatoe Chips</span>
+                    <span class="badge bg-primary">₦500</span>
+                  </div>
+                </div>
+                <div
+                  class="food-item"
+                  data-name="Creamy Pasta"
+                  data-price="1000"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Creamy Pasta</span>
+                    <span class="badge bg-primary">₦1,000</span>
+                  </div>
+                </div>
+
+                <div class="food-category">Meat & Protein</div>
+                <div
+                  class="food-item"
+                  data-name="Beef (2 pcs)"
+                  data-price="500"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Beef (2 pcs)</span>
+                    <span class="badge bg-primary">₦500</span>
+                  </div>
+                </div>
+                <div class="food-item" data-name="Beef (1 pc)" data-price="300">
+                  <div class="d-flex justify-content-between">
+                    <span>Beef (1 pc)</span>
+                    <span class="badge bg-primary">₦300</span>
+                  </div>
+                </div>
+                <div class="food-item" data-name="Moimoi" data-price="500">
+                  <div class="d-flex justify-content-between">
+                    <span>Moimoi</span>
+                    <span class="badge bg-primary">₦500</span>
+                  </div>
+                </div>
+                <div class="food-item" data-name="Goat Meat" data-price="500">
+                  <div class="d-flex justify-content-between">
+                    <span>Goat Meat</span>
+                    <span class="badge bg-primary">₦500</span>
+                  </div>
+                </div>
+                <div
+                  class="food-item"
+                  data-name="Moimoi (with egg)"
+                  data-price="1000"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Moimoi (with egg)</span>
+                    <span class="badge bg-primary">₦1,000</span>
+                  </div>
+                </div>
+                <div class="food-item" data-name="Goat Meat" data-price="1000">
+                  <div class="d-flex justify-content-between">
+                    <span>Goat Meat</span>
+                    <span class="badge bg-primary">₦1,000</span>
+                  </div>
+                </div>
+                <div
+                  class="food-item"
+                  data-name="Assorted Meat"
+                  data-price="500"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Assorted Meat</span>
+                    <span class="badge bg-primary">₦500</span>
+                  </div>
+                </div>
+                <div class="food-item" data-name="Gizzard" data-price="500">
+                  <div class="d-flex justify-content-between">
+                    <span>Gizzard</span>
+                    <span class="badge bg-primary">₦500</span>
+                  </div>
+                </div>
+                <div class="food-item" data-name="Egg" data-price="300">
+                  <div class="d-flex justify-content-between">
+                    <span>Egg</span>
+                    <span class="badge bg-primary">₦300</span>
+                  </div>
+                </div>
+                <div class="food-item" data-name="Plantain" data-price="500">
+                  <div class="d-flex justify-content-between">
+                    <span>Plantain</span>
+                    <span class="badge bg-primary">₦500</span>
+                  </div>
+                </div>
+                <div class="food-item" data-name="Coleslaw" data-price="500">
+                  <div class="d-flex justify-content-between">
+                    <span>Coleslaw</span>
+                    <span class="badge bg-primary">₦500</span>
+                  </div>
+                </div>
+
+                <div class="food-category">Chicken & Turkey</div>
+                <div
+                  class="food-item"
+                  data-name="Chicken (Large)"
+                  data-price="3500"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Chicken (Large)</span>
+                    <span class="badge bg-primary">₦3,500</span>
+                  </div>
+                </div>
+                <div
+                  class="food-item"
+                  data-name="Chicken (Medium)"
+                  data-price="3000"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Chicken (Medium)</span>
+                    <span class="badge bg-primary">₦3,000</span>
+                  </div>
+                </div>
+                <div
+                  class="food-item"
+                  data-name="Chicken (Small)"
+                  data-price="2500"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Chicken (Small)</span>
+                    <span class="badge bg-primary">₦2,500</span>
+                  </div>
+                </div>
+                <div
+                  class="food-item"
+                  data-name="Turkey wing"
+                  data-price="5000"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Turkey wing</span>
+                    <span class="badge bg-primary">₦5,000</span>
+                  </div>
+                </div>
+                <div
+                  class="food-item"
+                  data-name="Turkey (Large)"
+                  data-price="4000"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Turkey (Large)</span>
+                    <span class="badge bg-primary">₦4,000</span>
+                  </div>
+                </div>
+                <div
+                  class="food-item"
+                  data-name="Turkey (Medium)"
+                  data-price="3500"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Turkey (Medium)</span>
+                    <span class="badge bg-primary">₦3,500</span>
+                  </div>
+                </div>
+                <div
+                  class="food-item"
+                  data-name="Turkey (Small)"
+                  data-price="3000"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Turkey (Small)</span>
+                    <span class="badge bg-primary">₦3,000</span>
+                  </div>
+                </div>
+                <div
+                  class="food-item"
+                  data-name="Chicken & Chips"
+                  data-price="4000"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Chicken & Chips</span>
+                    <span class="badge bg-primary">₦4,000</span>
+                  </div>
+                </div>
+
+                <div class="food-category">Fish</div>
+                <div
+                  class="food-item"
+                  data-name="Fried Fish (Large)"
+                  data-price="2000"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Fried Fish (Large)</span>
+                    <span class="badge bg-primary">₦2,000</span>
+                  </div>
+                </div>
+                <div
+                  class="food-item"
+                  data-name="Fried Fish (Medium)"
+                  data-price="1500"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Fried Fish (Medium)</span>
+                    <span class="badge bg-primary">₦1,500</span>
+                  </div>
+                </div>
+                <div
+                  class="food-item"
+                  data-name="Catfish BBQ (Large)"
+                  data-price="12000"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Catfish BBQ (Large)</span>
+                    <span class="badge bg-primary">₦12,000</span>
+                  </div>
+                </div>
+                <div
+                  class="food-item"
+                  data-name="Catfish BBQ (Medium)"
+                  data-price="10000"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Catfish BBQ (Medium)</span>
+                    <span class="badge bg-primary">₦10,000</span>
+                  </div>
+                </div>
+                <div
+                  class="food-item"
+                  data-name="Catfish BBQ (Small)"
+                  data-price="9000"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Catfish BBQ (Small)</span>
+                    <span class="badge bg-primary">₦9,000</span>
+                  </div>
+                </div>
+                <div
+                  class="food-item"
+                  data-name="Croaker Fish (Large)"
+                  data-price="12000"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Croaker Fish (Large)</span>
+                    <span class="badge bg-primary">₦12,000</span>
+                  </div>
+                </div>
+                <div
+                  class="food-item"
+                  data-name="Croaker Fish (Medium)"
+                  data-price="10000"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Croaker Fish (Medium)</span>
+                    <span class="badge bg-primary">₦10,000</span>
+                  </div>
+                </div>
+                <div
+                  class="food-item"
+                  data-name="Croaker Fish (Small)"
+                  data-price="9000"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Croaker Fish (Small)</span>
+                    <span class="badge bg-primary">₦9,000</span>
+                  </div>
+                </div>
+
+                <div class="food-category">Drinks</div>
+                <div
+                  class="food-item"
+                  data-name="Coke, Fanta, Sprite, Pepsi"
+                  data-price="500"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Coke, Fanta, Sprite, Pepsi</span>
+                    <span class="badge bg-primary">₦500</span>
+                  </div>
+                </div>
+                <div class="food-item" data-name="Schweppes" data-price="500">
+                  <div class="d-flex justify-content-between">
+                    <span>Schweppes</span>
+                    <span class="badge bg-primary">₦500</span>
+                  </div>
+                </div>
+                <div class="food-item" data-name="Fearless" data-price="700">
+                  <div class="d-flex justify-content-between">
+                    <span>Fearless</span>
+                    <span class="badge bg-primary">₦700</span>
+                  </div>
+                </div>
+                <div class="food-item" data-name="Predator" data-price="600">
+                  <div class="d-flex justify-content-between">
+                    <span>Predator</span>
+                    <span class="badge bg-primary">₦600</span>
+                  </div>
+                </div>
+                <div class="food-item" data-name="5Alive Pet" data-price="800">
+                  <div class="d-flex justify-content-between">
+                    <span>5Alive Pet</span>
+                    <span class="badge bg-primary">₦800</span>
+                  </div>
+                </div>
+
+                <div
+                  class="food-item"
+                  data-name="Bottle Water"
+                  data-price="200"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Bottle Water</span>
+                    <span class="badge bg-primary">₦200</span>
+                  </div>
+                </div>
+
+                <div class="food-category">Takeaway & Extras</div>
+                <div
+                  class="food-item"
+                  data-name="Takeaway Big"
+                  data-price="200"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Takeaway Big</span>
+                    <span class="badge bg-primary">₦200</span>
+                  </div>
+                </div>
+                <div
+                  class="food-item"
+                  data-name="Takeaway Small"
+                  data-price="100"
+                >
+                  <div class="d-flex justify-content-between">
+                    <span>Takeaway Small</span>
+                    <span class="badge bg-primary">₦100</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Order Section -->
+          <div class="col-lg-7">
+            <div class="card">
+              <div
+                class="card-header d-flex justify-content-between align-items-center"
+              >
+                <span><i class="bi bi-cart-plus"></i> Current Order</span>
+                <button
+                  id="completeOrderBtn"
+                  class="btn btn-complete-order btn-sm"
+                >
+                  <i class="bi bi-check-circle"></i> Complete Order
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="mb-3">
+                  <label for="attendeeSelect" class="form-label"
+                    >Select Attendee:</label
+                  >
+                  <select
+                    id="attendeeSelect"
+                    class="form-select attendee-select"
+                  >
+                    <option value="">Select an attendee</option>
+                    <option value="Gift">Gift</option>
+                    <option value="Promise">Promise</option>
+                    <option value="Chioma">Chioma</option>
+                    <option value="Joy">Joy</option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label for="paymentTypeSelect" class="form-label"
+                    >Payment Type:</label
+                  >
+                  <select
+                    id="paymentTypeSelect"
+                    class="form-select payment-type-select"
+                  >
+                    <option value="">Select payment type</option>
+                    <option value="POS">POS</option>
+                    <option value="Cash">Cash</option>
+                    <option value="Bank transfer">Bank transfer</option>
+                  </select>
+                </div>
+
+                <div id="currentOrderItems">
+                  <div class="text-center text-muted py-4">
+                    <i class="bi bi-cart-x icon-3rem"></i>
+                    <p class="mt-2">
+                      No items in order. Select items from the menu.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="order-summary">
+                  <div class="d-flex justify-content-between">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">₦0</span>
+                  </div>
+                  <div class="d-flex justify-content-between mt-2">
+                    <span>Discount:</span>
+                    <select
+                      id="discountSelect"
+                      class="discount-select"
+                      title="Select discount amount"
+                    >
+                      <option value="0">None</option>
+                      <option value="100">₦100</option>
+                      <option value="200">₦200</option>
+                      <option value="300">₦300</option>
+                      <option value="400">₦400</option>
+                      <option value="500">₦500</option>
+                      <option value="1000">₦1,000</option>
+                    </select>
+                  </div>
+                  <div class="d-flex justify-content-between mt-2">
+                    <span>Discount Amount:</span>
+                    <span id="discountAmount">₦0</span>
+                  </div>
+                  <hr />
+                  <div class="d-flex justify-content-between fw-bold">
+                    <span>Total:</span>
+                    <span id="total">₦0</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Daily Orders Section -->
+            <div class="card mt-4">
+              <div
+                class="card-header d-flex justify-content-between align-items-center"
+              >
+                <span><i class="bi bi-calendar-check"></i> Daily Orders</span>
+                <div class="export-buttons">
+                  <button
+                    id="exportExcelBtn"
+                    class="btn btn-export-excel btn-sm"
+                  >
+                    <i class="bi bi-file-earmark-excel"></i> Export Excel
+                  </button>
+                  <button id="exportPdfBtn" class="btn btn-export-pdf btn-sm">
+                    <i class="bi bi-file-earmark-pdf"></i> Export PDF
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div id="dailyOrdersList">
+                  <div class="text-center text-muted py-4">
+                    <i class="bi bi-calendar-x icon-3rem"></i>
+                    <p class="mt-2">No orders recorded yet.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Orders Page -->
+      <div id="orders-page" class="page-section">
+        <div class="card">
+          <div
+            class="card-header d-flex justify-content-between align-items-center"
+          >
+            <span><i class="bi bi-receipt"></i> All Orders</span>
+            <div class="export-buttons">
+              <button
+                id="exportOrdersExcelBtn"
+                class="btn btn-export-excel btn-sm"
+              >
+                <i class="bi bi-file-earmark-excel"></i> Export Excel
+              </button>
+              <button id="exportOrdersPdfBtn" class="btn btn-export-pdf btn-sm">
+                <i class="bi bi-file-earmark-pdf"></i> Export PDF
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Attendee</th>
+                    <th>Payment Type</th>
+                    <th>Items</th>
+                    <th>Subtotal</th>
+                    <th>Discount</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="allOrdersTableBody">
+                  <tr>
+                    <td colspan="9" class="text-center text-muted py-4">
+                      <i class="bi bi-inbox icon-3rem"></i>
+                      <p class="mt-2">No orders found.</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reports Page -->
+      <div id="reports-page" class="page-section">
+        <div class="row mb-4">
+          <div class="col-md-3">
+            <div class="stats-card">
+              <div class="stats-number" id="totalOrdersStat">0</div>
+              <div class="stats-label">Total Orders</div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="stats-card">
+              <div class="stats-number" id="totalSalesStat">₦0</div>
+              <div class="stats-label">Total Sales</div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="stats-card">
+              <div class="stats-number" id="avgOrderStat">₦0</div>
+              <div class="stats-label">Avg. Order</div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="stats-card">
+              <div class="stats-number" id="totalDiscountsStat">₦0</div>
+              <div class="stats-label">Total Discounts</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <i class="bi bi-person"></i> Sales by Attendee
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Attendee</th>
+                        <th>Orders</th>
+                        <th>Total Sales</th>
+                      </tr>
+                    </thead>
+                    <tbody id="attendeeSalesTableBody">
+                      <tr>
+                        <td colspan="3" class="text-center text-muted py-4">
+                          No data available
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <i class="bi bi-calendar3"></i> Sales by Date
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Orders</th>
+                        <th>Total Sales</th>
+                      </tr>
+                    </thead>
+                    <tbody id="dateSalesTableBody">
+                      <tr>
+                        <td colspan="3" class="text-center text-muted py-4">
+                          No data available
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <p class="mb-0">Niyexdroid Technologies ©2025</p>
+      </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div class="toast-container"></div>
+
+    <!-- Hidden PDF Container -->
+    <div id="pdfContainer" class="pdf-container"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initialize data
+        let currentOrder = [];
+        let dailyOrders = JSON.parse(localStorage.getItem("dailyOrders")) || [];
+
+        // DOM Elements
+        const foodItems = document.querySelectorAll(".food-item");
+        const currentOrderItems = document.getElementById("currentOrderItems");
+        const attendeeSelect = document.getElementById("attendeeSelect");
+        const paymentTypeSelect = document.getElementById("paymentTypeSelect");
+        const subtotalEl = document.getElementById("subtotal");
+        const discountSelect = document.getElementById("discountSelect");
+        const discountAmountEl = document.getElementById("discountAmount");
+        const totalEl = document.getElementById("total");
+        const completeOrderBtn = document.getElementById("completeOrderBtn");
+        const dailyOrdersList = document.getElementById("dailyOrdersList");
+        const exportExcelBtn = document.getElementById("exportExcelBtn");
+        const exportPdfBtn = document.getElementById("exportPdfBtn");
+        const exportOrdersExcelBtn = document.getElementById(
+          "exportOrdersExcelBtn"
+        );
+        const exportOrdersPdfBtn =
+          document.getElementById("exportOrdersPdfBtn");
+        const allOrdersTableBody =
+          document.getElementById("allOrdersTableBody");
+        const attendeeSalesTableBody = document.getElementById(
+          "attendeeSalesTableBody"
+        );
+        const dateSalesTableBody =
+          document.getElementById("dateSalesTableBody");
+        const totalOrdersStat = document.getElementById("totalOrdersStat");
+        const totalSalesStat = document.getElementById("totalSalesStat");
+        const avgOrderStat = document.getElementById("avgOrderStat");
+        const totalDiscountsStat =
+          document.getElementById("totalDiscountsStat");
+        const pdfContainer = document.getElementById("pdfContainer");
+
+        // Navigation
+        const navLinks = document.querySelectorAll(".nav-link");
+        const pages = document.querySelectorAll(".page-section");
+
+        navLinks.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            const targetPage = this.getAttribute("data-page");
+
+            // Update active nav link
+            navLinks.forEach((l) => l.classList.remove("active"));
+            this.classList.add("active");
+
+            // Show target page
+            pages.forEach((page) => page.classList.remove("active"));
+            document
+              .getElementById(`${targetPage}-page`)
+              .classList.add("active");
+
+            // Update page content if needed
+            if (targetPage === "orders") {
+              updateOrdersPage();
+            } else if (targetPage === "reports") {
+              updateReportsPage();
+            }
+          });
+        });
+
+        // Event Listeners
+        foodItems.forEach((item) => {
+          item.addEventListener("click", function () {
+            const name = this.getAttribute("data-name");
+            const price = parseInt(this.getAttribute("data-price"));
+
+            // Check if item already exists in order
+            const existingItemIndex = currentOrder.findIndex(
+              (item) => item.name === name
+            );
+
+            if (existingItemIndex !== -1) {
+              // Increase quantity if already exists
+              currentOrder[existingItemIndex].quantity += 1;
+            } else {
+              // Add new item
+              currentOrder.push({
+                name,
+                price,
+                quantity: 1,
+              });
+            }
+
+            // Update UI
+            updateCurrentOrderUI();
+            showToast("Item added to order", "success");
+          });
+        });
+
+        discountSelect.addEventListener("change", function () {
+          updateCurrentOrderUI();
+        });
+
+        completeOrderBtn.addEventListener("click", function () {
+          if (currentOrder.length === 0) {
+            showToast("Please add items to your order", "error");
+            return;
+          }
+
+          if (!attendeeSelect.value) {
+            showToast("Please select an attendee", "error");
+            return;
+          }
+
+          if (!paymentTypeSelect.value) {
+            showToast("Please select a payment type", "error");
+            return;
+          }
+
+          // Calculate order total
+          const subtotal = currentOrder.reduce(
+            (sum, item) => sum + item.price * item.quantity,
+            0
+          );
+          const discount = parseInt(discountSelect.value);
+          const total = subtotal - discount;
+
+          // Create order object
+          const order = {
+            id: Date.now(),
+            attendee: attendeeSelect.value,
+            paymentType: paymentTypeSelect.value,
+            date: new Date().toISOString().split("T")[0],
+            time: new Date().toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            }),
+            items: [...currentOrder],
+            subtotal,
+            discount,
+            total,
+          };
+
+          // Add to daily orders
+          const today = order.date;
+          const existingDayIndex = dailyOrders.findIndex(
+            (day) => day.date === today
+          );
+
+          if (existingDayIndex !== -1) {
+            dailyOrders[existingDayIndex].orders.push(order);
+            dailyOrders[existingDayIndex].total += order.total;
+          } else {
+            dailyOrders.push({
+              date: today,
+              orders: [order],
+              total: order.total,
+            });
+          }
+
+          // Save to localStorage
+          localStorage.setItem("dailyOrders", JSON.stringify(dailyOrders));
+
+          // Reset current order
+          currentOrder = [];
+          attendeeSelect.value = "";
+          paymentTypeSelect.value = "";
+          discountSelect.value = "0";
+          updateCurrentOrderUI();
+          updateDailyOrdersUI();
+
+          showToast("Order completed successfully!", "success");
+        });
+
+        exportExcelBtn.addEventListener("click", function () {
+          if (dailyOrders.length === 0) {
+            showToast("No orders to export", "error");
+            return;
+          }
+
+          // Calculate total sales
+          let totalSales = 0;
+          dailyOrders.forEach((day) => {
+            totalSales += day.total;
+          });
+
+          // Prepare data for Excel
+          let excelData = [];
+
+          // Add headers
+          excelData.push([
+            "Date",
+            "Attendee",
+            "Payment Type",
+            "Time",
+            "Item",
+            "Price",
+            "Quantity",
+            "Subtotal",
+            "Discount",
+            "Total",
+          ]);
+
+          // Add order data
+          dailyOrders.forEach((day) => {
+            day.orders.forEach((order) => {
+              order.items.forEach((item) => {
+                excelData.push([
+                  day.date,
+                  order.attendee,
+                  order.paymentType,
+                  order.time,
+                  item.name,
+                  `₦${item.price}`,
+                  item.quantity,
+                  `₦${item.price * item.quantity}`,
+                  `₦${order.discount}`,
+                  `₦${order.total}`,
+                ]);
+              });
+            });
+          });
+
+          // Add empty row and total sales
+          excelData.push([
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "TOTAL SALES:",
+            `₦${totalSales.toLocaleString()}`,
+          ]);
+
+          // Create workbook and worksheet
+          const wb = XLSX.utils.book_new();
+          const ws = XLSX.utils.aoa_to_sheet(excelData);
+
+          // Style the worksheet
+          const range = XLSX.utils.decode_range(ws["!ref"]);
+
+          // Style header row
+          for (let C = range.s.c; C <= range.e.c; ++C) {
+            const headerCell = XLSX.utils.encode_cell({ r: 0, c: C });
+            if (!ws[headerCell]) continue;
+            ws[headerCell].s = {
+              font: { bold: true, color: { rgb: "FFFFFF" } },
+              fill: { fgColor: { rgb: "4f6367" } },
+              alignment: { horizontal: "center" },
+              border: {
+                top: { style: "thin", color: { rgb: "000000" } },
+                bottom: { style: "thin", color: { rgb: "000000" } },
+                left: { style: "thin", color: { rgb: "000000" } },
+                right: { style: "thin", color: { rgb: "000000" } },
+              },
+            };
+          }
+
+          // Style data rows
+          for (let R = range.s.r + 1; R <= range.e.r; ++R) {
+            for (let C = range.s.c; C <= range.e.c; ++C) {
+              const cellAddress = XLSX.utils.encode_cell({ r: R, c: C });
+              if (!ws[cellAddress]) continue;
+
+              // Skip styling for empty row and total sales row
+              if (R === range.e.r - 1 || R === range.e.r) {
+                if (R === range.e.r) {
+                  // Style total sales row
+                  if (C === 8) {
+                    // "TOTAL SALES:" cell
+                    ws[cellAddress].s = {
+                      font: { bold: true },
+                      alignment: { horizontal: "right" },
+                    };
+                  } else if (C === 9) {
+                    // Total sales value cell
+                    ws[cellAddress].s = {
+                      font: { bold: true, color: { rgb: "FFFFFF" } },
+                      fill: { fgColor: { rgb: "4f6367" } },
+                      alignment: { horizontal: "right" },
+                      border: {
+                        top: { style: "double", color: { rgb: "000000" } },
+                        bottom: { style: "thin", color: { rgb: "000000" } },
+                        left: { style: "thin", color: { rgb: "000000" } },
+                        right: { style: "thin", color: { rgb: "000000" } },
+                      },
+                    };
+                  }
+                }
+                continue;
+              }
+
+              // Style data cells
+              ws[cellAddress].s = {
+                alignment: { horizontal: C === 0 ? "left" : "center" },
+                border: {
+                  top: { style: "thin", color: { rgb: "000000" } },
+                  bottom: { style: "thin", color: { rgb: "000000" } },
+                  left: { style: "thin", color: { rgb: "000000" } },
+                  right: { style: "thin", color: { rgb: "000000" } },
+                },
+              };
+            }
+          }
+
+          // Set column widths
+          ws["!cols"] = [
+            { wch: 12 }, // Date
+            { wch: 15 }, // Attendee
+            { wch: 15 }, // Payment Type
+            { wch: 10 }, // Time
+            { wch: 30 }, // Item
+            { wch: 10 }, // Price
+            { wch: 10 }, // Quantity
+            { wch: 12 }, // Subtotal
+            { wch: 12 }, // Discount
+            { wch: 12 }, // Total
+          ];
+
+          // Add worksheet to workbook
+          XLSX.utils.book_append_sheet(wb, ws, "Orders");
+
+          // Save workbook
+          XLSX.writeFile(wb, "CHOPS_GRILLS_Orders.xlsx");
+
+          showToast("Excel file exported successfully", "success");
+        });
+
+        exportPdfBtn.addEventListener("click", function () {
+          if (dailyOrders.length === 0) {
+            showToast("No orders to export", "error");
+            return;
+          }
+
+          // Show loading state
+          const originalHtml = this.innerHTML;
+          this.innerHTML =
+            '<span class="loading-spinner"></span> Generating PDF...';
+          this.disabled = true;
+
+          // Calculate total sales
+          let totalSales = 0;
+          dailyOrders.forEach((day) => {
+            totalSales += day.total;
+          });
+
+          // Generate PDF content
+          generateDailyOrdersPdf(dailyOrders, totalSales, function () {
+            // Reset button state
+            exportPdfBtn.innerHTML = originalHtml;
+            exportPdfBtn.disabled = false;
+            showToast("PDF file exported successfully", "success");
+          });
+        });
+
+        exportOrdersExcelBtn.addEventListener("click", function () {
+          if (dailyOrders.length === 0) {
+            showToast("No orders to export", "error");
+            return;
+          }
+
+          // Calculate total sales
+          let totalSales = 0;
+          let totalOrders = 0;
+          let totalDiscounts = 0;
+          let totalSubtotals = 0;
+
+          // Prepare data for Excel
+          let excelData = [];
+
+          // Add headers
+          excelData.push([
+            "Date",
+            "Time",
+            "Attendee",
+            "Payment Type",
+            "Items Count",
+            "Subtotal",
+            "Discount",
+            "Total",
+          ]);
+
+          // Add order data
+          dailyOrders.forEach((day) => {
+            day.orders.forEach((order) => {
+              totalOrders++;
+              totalSales += order.total;
+              totalDiscounts += order.discount;
+              totalSubtotals += order.subtotal;
+
+              excelData.push([
+                day.date,
+                order.time,
+                order.attendee,
+                order.paymentType,
+                order.items.length,
+                `₦${order.subtotal}`,
+                `₦${order.discount}`,
+                `₦${order.total}`,
+              ]);
+            });
+          });
+
+          // Add empty row and totals
+          excelData.push(["", "", "", "", "", "", "", ""]);
+          excelData.push([
+            "",
+            "",
+            "",
+            "",
+            "TOTALS:",
+            `₦${totalSubtotals.toLocaleString()}`,
+            `₦${totalDiscounts.toLocaleString()}`,
+            `₦${totalSales.toLocaleString()}`,
+          ]);
+
+          // Create workbook and worksheet
+          const wb = XLSX.utils.book_new();
+          const ws = XLSX.utils.aoa_to_sheet(excelData);
+
+          // Style the worksheet
+          const range = XLSX.utils.decode_range(ws["!ref"]);
+
+          // Style header row
+          for (let C = range.s.c; C <= range.e.c; ++C) {
+            const headerCell = XLSX.utils.encode_cell({ r: 0, c: C });
+            if (!ws[headerCell]) continue;
+            ws[headerCell].s = {
+              font: { bold: true, color: { rgb: "FFFFFF" } },
+              fill: { fgColor: { rgb: "4f6367" } },
+              alignment: { horizontal: "center" },
+              border: {
+                top: { style: "thin", color: { rgb: "000000" } },
+                bottom: { style: "thin", color: { rgb: "000000" } },
+                left: { style: "thin", color: { rgb: "000000" } },
+                right: { style: "thin", color: { rgb: "000000" } },
+              },
+            };
+          }
+
+          // Style data rows
+          for (let R = range.s.r + 1; R <= range.e.r; ++R) {
+            for (let C = range.s.c; C <= range.e.c; ++C) {
+              const cellAddress = XLSX.utils.encode_cell({ r: R, c: C });
+              if (!ws[cellAddress]) continue;
+
+              // Skip styling for empty row and totals row
+              if (R === range.e.r - 1 || R === range.e.r) {
+                if (R === range.e.r) {
+                  // Style totals row
+                  if (C === 4) {
+                    // "TOTALS:" cell
+                    ws[cellAddress].s = {
+                      font: { bold: true },
+                      alignment: { horizontal: "right" },
+                    };
+                  } else if (C >= 5) {
+                    // Total values cells
+                    ws[cellAddress].s = {
+                      font: { bold: true, color: { rgb: "FFFFFF" } },
+                      fill: { fgColor: { rgb: "4f6367" } },
+                      alignment: { horizontal: "right" },
+                      border: {
+                        top: { style: "double", color: { rgb: "000000" } },
+                        bottom: { style: "thin", color: { rgb: "000000" } },
+                        left: { style: "thin", color: { rgb: "000000" } },
+                        right: { style: "thin", color: { rgb: "000000" } },
+                      },
+                    };
+                  }
+                }
+                continue;
+              }
+
+              // Style data cells
+              ws[cellAddress].s = {
+                alignment: { horizontal: C === 0 ? "left" : "center" },
+                border: {
+                  top: { style: "thin", color: { rgb: "000000" } },
+                  bottom: { style: "thin", color: { rgb: "000000" } },
+                  left: { style: "thin", color: { rgb: "000000" } },
+                  right: { style: "thin", color: { rgb: "000000" } },
+                },
+              };
+            }
+          }
+
+          // Set column widths
+          ws["!cols"] = [
+            { wch: 12 }, // Date
+            { wch: 10 }, // Time
+            { wch: 15 }, // Attendee
+            { wch: 15 }, // Payment Type
+            { wch: 12 }, // Items Count
+            { wch: 12 }, // Subtotal
+            { wch: 12 }, // Discount
+            { wch: 12 }, // Total
+          ];
+
+          // Add worksheet to workbook
+          XLSX.utils.book_append_sheet(wb, ws, "All Orders");
+
+          // Save workbook
+          XLSX.writeFile(wb, "CHOPS_GRILLS_All_Orders.xlsx");
+
+          showToast("Excel file exported successfully", "success");
+        });
+
+        exportOrdersPdfBtn.addEventListener("click", function () {
+          if (dailyOrders.length === 0) {
+            showToast("No orders to export", "error");
+            return;
+          }
+
+          // Show loading state
+          const originalHtml = this.innerHTML;
+          this.innerHTML =
+            '<span class="loading-spinner"></span> Generating PDF...';
+          this.disabled = true;
+
+          // Calculate total sales
+          let totalSales = 0;
+          let totalOrders = 0;
+          let totalDiscounts = 0;
+
+          dailyOrders.forEach((day) => {
+            day.orders.forEach((order) => {
+              totalOrders++;
+              totalSales += order.total;
+              totalDiscounts += order.discount;
+            });
+          });
+
+          // Generate PDF content
+          generateAllOrdersPdf(
+            dailyOrders,
+            totalSales,
+            totalDiscounts,
+            function () {
+              // Reset button state
+              exportOrdersPdfBtn.innerHTML = originalHtml;
+              exportOrdersPdfBtn.disabled = false;
+              showToast("PDF file exported successfully", "success");
+            }
+          );
+        });
+
+        // Event delegation for view orders buttons
+        document.addEventListener("click", function (event) {
+          if (event.target.closest(".view-day-orders")) {
+            const button = event.target.closest(".view-day-orders");
+            const date = button.getAttribute("data-date");
+            const day = dailyOrders.find((d) => d.date === date);
+
+            if (day) {
+              showDayOrdersModal(day);
+            }
+          }
+
+          if (event.target.closest(".view-order-details")) {
+            const button = event.target.closest(".view-order-details");
+            const orderId = parseInt(button.getAttribute("data-order-id"));
+            const date = button.getAttribute("data-date");
+            const day = dailyOrders.find((d) => d.date === date);
+
+            if (day) {
+              const order = day.orders.find((o) => o.id === orderId);
+              if (order) {
+                showOrderDetailsModal(order);
+              }
+            }
+          }
+        });
+
+        // Helper function to generate Daily Orders PDF
+        function generateDailyOrdersPdf(dailyOrders, totalSales, callback) {
+          let html = `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>CHOPS & GRILLS ENTERPRISE - Daily Orders Report</title>
+                <style>
+                    body { font-family: Arial, sans-serif; margin: 20px; }
+                    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+                    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; vertical-align: middle; }
+                    th { background-color: #4f6367; color: white; }
+                    tr:nth-child(even) { background-color: #f2f2f2; }
+                    .header { text-align: center; margin-bottom: 30px; }
+                    .total-row { font-weight: bold; background-color: #4f6367; color: white; }
+                    .total-row td { text-align: right; }
+                </style>
+            </head>
+            <body>
+                <div class="header">
+                    <h1>CHOPS & GRILLS ENTERPRISE - Daily Orders Report</h1>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Attendee</th>
+                            <th>Payment Type</th>
+                            <th>Time</th>
+                            <th>Item</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
+                            <th>Discount</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
+
+          dailyOrders.forEach((day) => {
+            day.orders.forEach((order) => {
+              const numItems = order.items.length;
+              if (numItems === 0) return;
+
+              order.items.forEach((item, index) => {
+                html += `
+                        <tr>
+                            ${
+                              index === 0
+                                ? `<td rowspan="${numItems}">${day.date}</td>`
+                                : ""
+                            }
+                            ${
+                              index === 0
+                                ? `<td rowspan="${numItems}">${order.attendee}</td>`
+                                : ""
+                            }
+                            ${
+                              index === 0
+                                ? `<td rowspan="${numItems}">${order.paymentType}</td>`
+                                : ""
+                            }
+                            ${
+                              index === 0
+                                ? `<td rowspan="${numItems}">${order.time}</td>`
+                                : ""
+                            }
+                            <td>${item.name}</td>
+                            <td>₦${item.price.toLocaleString()}</td>
+                            <td>${item.quantity}</td>
+                            <td>₦${(
+                              item.price * item.quantity
+                            ).toLocaleString()}</td>
+                            ${
+                              index === 0
+                                ? `<td rowspan="${numItems}">₦${order.discount.toLocaleString()}</td>`
+                                : ""
+                            }
+                            ${
+                              index === 0
+                                ? `<td rowspan="${numItems}">₦${order.total.toLocaleString()}</td>`
+                                : ""
+                            }
+                        </tr>
+                    `;
+              });
+            });
+          });
+
+          html += `
+                    </tbody>
+                    <tfoot>
+                        <tr class="total-row">
+                            <td colspan="9" style="text-align: right; padding-right: 10px;">TOTAL SALES:</td>
+                            <td>₦${totalSales.toLocaleString()}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </body>
+            </html>
+        `;
+
+          const element = document.createElement("div");
+          element.innerHTML = html;
+
+          const opt = {
+            margin: 0.5,
+            filename: "CHOPS_GRILLS_Daily_Orders.pdf",
+            image: { type: "jpeg", quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true },
+            jsPDF: { unit: "in", format: "letter", orientation: "landscape" },
+          };
+
+          html2pdf()
+            .from(element)
+            .set(opt)
+            .save()
+            .then(function () {
+              if (callback) callback();
+            });
+        }
+
+        // Helper function to generate All Orders PDF
+        function generateAllOrdersPdf(
+          dailyOrders,
+          totalSales,
+          totalDiscounts,
+          callback
+        ) {
+          let totalSubtotals = 0;
+          let totalOrders = 0;
+          dailyOrders.forEach((day) => {
+            day.orders.forEach((order) => {
+              totalSubtotals += order.subtotal;
+              totalOrders++;
+            });
+          });
+
+          let html = `
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>CHOPS & GRILLS ENTERPRISE - All Orders Report</title>
+                        <style>
+                            body { font-family: Arial, sans-serif; margin: 20px; }
+                            table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+                            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                            th { background-color: #4f6367; color: white; }
+                            tr:nth-child(even) { background-color: #f2f2f2; }
+                            .header { text-align: center; margin-bottom: 30px; }
+                            .total-row { font-weight: bold; background-color: #4f6367; color: white; }
+                            .total-row td { text-align: right; }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="header">
+                            <h1>CHOPS & GRILLS ENTERPRISE - All Orders Report</h1>
+                            <p>Total Orders: ${totalOrders}</p>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Attendee</th>
+                                    <th>Payment Type</th>
+                                    <th>Items Count</th>
+                                    <th>Subtotal</th>
+                                    <th>Discount</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+
+          dailyOrders.forEach((day) => {
+            day.orders.forEach((order) => {
+              html += `
+                            <tr>
+                                <td>${day.date}</td>
+                                <td>${order.time}</td>
+                                <td>${order.attendee}</td>
+                                <td>${order.paymentType}</td>
+                                <td>${order.items.length}</td>
+                                <td>₦${order.subtotal.toLocaleString()}</td>
+                                <td>₦${order.discount.toLocaleString()}</td>
+                                <td>₦${order.total.toLocaleString()}</td>
+                            </tr>
+                        `;
+            });
+          });
+
+          html += `
+                            </tbody>
+                            <tfoot>
+                                <tr class="total-row">
+                                    <td colspan="5" style="text-align: right; padding-right: 10px;">TOTALS:</td>
+                                    <td>₦${totalSubtotals.toLocaleString()}</td>
+                                    <td>₦${totalDiscounts.toLocaleString()}</td>
+                                    <td>₦${totalSales.toLocaleString()}</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </body>
+                    </html>
+                `;
+
+          const element = document.createElement("div");
+          element.innerHTML = html;
+
+          const opt = {
+            margin: 0.5,
+            filename: "CHOPS_GRILLS_All_Orders.pdf",
+            image: { type: "jpeg", quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true },
+            jsPDF: { unit: "in", format: "letter", orientation: "landscape" },
+          };
+
+          html2pdf()
+            .from(element)
+            .set(opt)
+            .save()
+            .then(function () {
+              if (callback) callback();
+            });
+        }
+
+        function updateReportsPage() {
+          // Calculate statistics
+          let totalOrders = 0;
+          let totalSales = 0;
+          let totalDiscounts = 0;
+
+          const attendeeSales = {};
+          const dateSales = {};
+
+          dailyOrders.forEach((day) => {
+            day.orders.forEach((order) => {
+              totalOrders++;
+              totalSales += order.total;
+              totalDiscounts += order.discount;
+
+              // Sales by attendee
+              if (!attendeeSales[order.attendee]) {
+                attendeeSales[order.attendee] = {
+                  orders: 0,
+                  total: 0,
+                };
+              }
+              attendeeSales[order.attendee].orders++;
+              attendeeSales[order.attendee].total += order.total;
+
+              // Sales by date
+              if (!dateSales[day.date]) {
+                dateSales[day.date] = {
+                  orders: 0,
+                  total: 0,
+                };
+              }
+              dateSales[day.date].orders++;
+              dateSales[day.date].total += order.total;
+            });
+          });
+
+          // Update statistics
+          totalOrdersStat.textContent = totalOrders;
+          totalSalesStat.textContent = `₦${totalSales.toLocaleString()}`;
+          avgOrderStat.textContent = `₦${
+            totalOrders > 0
+              ? Math.round(totalSales / totalOrders).toLocaleString()
+              : 0
+          }`;
+          totalDiscountsStat.textContent = `₦${totalDiscounts.toLocaleString()}`;
+
+          // Update attendee sales table
+          attendeeSalesTableBody.innerHTML = "";
+          Object.keys(attendeeSales).forEach((attendee) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                        <td>${attendee}</td>
+                        <td>${attendeeSales[attendee].orders}</td>
+                        <td>₦${attendeeSales[
+                          attendee
+                        ].total.toLocaleString()}</td>
+                    `;
+            attendeeSalesTableBody.appendChild(row);
+          });
+
+          // Update date sales table
+          dateSalesTableBody.innerHTML = "";
+          Object.keys(dateSales)
+            .sort()
+            .reverse()
+            .forEach((date) => {
+              const row = document.createElement("tr");
+              const formattedDate = new Date(date).toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              });
+              row.innerHTML = `
+                        <td>${formattedDate}</td>
+                        <td>${dateSales[date].orders}</td>
+                        <td>₦${dateSales[date].total.toLocaleString()}</td>
+                    `;
+              dateSalesTableBody.appendChild(row);
+            });
+        }
+
+        function showDayOrdersModal(day) {
+          let modalHtml = `
+                    <div class="modal fade" id="dayOrdersModal" tabindex="-1">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Orders for ${new Date(
+                                      day.date
+                                    ).toLocaleDateString("en-US", {
+                                      weekday: "long",
+                                      year: "numeric",
+                                      month: "long",
+                                      day: "numeric",
+                                    })}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Time</th>
+                                                    <th>Attendee</th>
+                                                    <th>Items</th>
+                                                    <th>Total</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                `;
+
+          day.orders.forEach((order) => {
+            const itemsSummary = order.items
+              .map((item) => `${item.name} (${item.quantity})`)
+              .join(", ");
+            modalHtml += `
+                        <tr>
+                            <td>${order.time}</td>
+                            <td>${order.attendee}</td>
+                            <td>${itemsSummary}</td>
+                            <td>₦${order.total.toLocaleString()}</td>
+                            <td>
+                                <button class="btn btn-sm btn-view-order view-order-details" data-order-id="${
+                                  order.id
+                                }" data-date="${day.date}">
+                                    <i class="bi bi-eye"></i> Details
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+          });
+
+          modalHtml += `
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+          // Remove existing modal if any
+          const existingModal = document.getElementById("dayOrdersModal");
+          if (existingModal) {
+            existingModal.remove();
+          }
+
+          // Add modal to body
+          document.body.insertAdjacentHTML("beforeend", modalHtml);
+
+          // Show modal
+          const modal = new bootstrap.Modal(
+            document.getElementById("dayOrdersModal")
+          );
+          modal.show();
+        }
+
+        function showOrderDetailsModal(order) {
+          let modalHtml = `
+                    <div class="modal fade" id="orderDetailsModal" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Order Details</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row mb-3">
+                                        <div class="col-6">
+                                            <strong>Date:</strong> ${new Date(
+                                              order.date
+                                            ).toLocaleDateString("en-US", {
+                                              weekday: "long",
+                                              year: "numeric",
+                                              month: "long",
+                                              day: "numeric",
+                                            })}
+                                        </div>
+                                        <div class="col-6">
+                                            <strong>Time:</strong> ${order.time}
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-6">
+                                            <strong>Attendee:</strong> ${
+                                              order.attendee
+                                            }
+                                        </div>
+                                        <div class="col-6">
+                                            <strong>Payment:</strong> ${
+                                              order.paymentType
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-6">
+                                            <strong>Total:</strong> ₦${order.total.toLocaleString()}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <h6>Items:</h6>
+                                    <div class="table-responsive">
+                                        <table class="table table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>Item</th>
+                                                    <th>Price</th>
+                                                    <th>Quantity</th>
+                                                    <th>Subtotal</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                `;
+
+          order.items.forEach((item) => {
+            modalHtml += `
+                        <tr>
+                            <td>${item.name}</td>
+                            <td>₦${item.price.toLocaleString()}</td>
+                            <td>${item.quantity}</td>
+                            <td>₦${(
+                              item.price * item.quantity
+                            ).toLocaleString()}</td>
+                        </tr>
+                    `;
+          });
+
+          modalHtml += `
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="3"><strong>Subtotal:</strong></td>
+                                                    <td><strong>₦${order.subtotal.toLocaleString()}</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3"><strong>Discount:</strong></td>
+                                                    <td><strong>₦${order.discount.toLocaleString()}</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3"><strong>Total:</strong></td>
+                                                    <td><strong>₦${order.total.toLocaleString()}</strong></td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+          // Remove existing modal if any
+          const existingModal = document.getElementById("orderDetailsModal");
+          if (existingModal) {
+            existingModal.remove();
+          }
+
+          // Add modal to body
+          document.body.insertAdjacentHTML("beforeend", modalHtml);
+
+          // Show modal
+          const modal = new bootstrap.Modal(
+            document.getElementById("orderDetailsModal")
+          );
+          modal.show();
+        }
+
+        function showToast(message, type = "info") {
+          const toast = document.createElement("div");
+          toast.className = `custom-toast toast-${type}`;
+
+          const iconMap = {
+            success: "bi-check-circle",
+            error: "bi-x-circle",
+            info: "bi-info-circle",
+          };
+
+          toast.innerHTML = `
+                    <i class="bi ${iconMap[type]} toast-icon"></i>
+                    <div>${message}</div>
+                `;
+
+          document.querySelector(".toast-container").appendChild(toast);
+
+          // Auto remove after 3 seconds
+          setTimeout(() => {
+            toast.remove();
+          }, 3000);
+        }
+
+        function updateCurrentOrderUI() {
+          if (currentOrder.length === 0) {
+            currentOrderItems.innerHTML = `
+              <div class="text-center text-muted py-4">
+                <i class="bi bi-cart-x icon-3rem"></i>
+                <p class="mt-2">
+                  No items in order. Select items from the menu.
+                </p>
+              </div>
+            `;
+          } else {
+            let html = "";
+            currentOrder.forEach((item, index) => {
+              html += `
+                <div class="order-item">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <strong>${item.name}</strong>
+                      <div class="text-muted small">₦${item.price.toLocaleString()} × ${
+                item.quantity
+              }</div>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="badge bg-primary">₦${(
+                        item.price * item.quantity
+                      ).toLocaleString()}</span>
+                      <button class="btn btn-sm btn-outline-danger remove-item" data-index="${index}">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              `;
+            });
+            currentOrderItems.innerHTML = html;
+
+            // Add event listeners to remove buttons
+            document.querySelectorAll(".remove-item").forEach((btn) => {
+              btn.addEventListener("click", function () {
+                const index = parseInt(this.getAttribute("data-index"));
+                currentOrder.splice(index, 1);
+                updateCurrentOrderUI();
+                showToast("Item removed from order", "info");
+              });
+            });
+          }
+
+          // Calculate totals
+          const subtotal = currentOrder.reduce(
+            (sum, item) => sum + item.price * item.quantity,
+            0
+          );
+          const discount = parseInt(discountSelect.value);
+          const total = subtotal - discount;
+
+          // Update summary
+          subtotalEl.textContent = `₦${subtotal.toLocaleString()}`;
+          discountAmountEl.textContent = `₦${discount.toLocaleString()}`;
+          totalEl.textContent = `₦${total.toLocaleString()}`;
+        }
+
+        function updateDailyOrdersUI() {
+          if (dailyOrders.length === 0) {
+            dailyOrdersList.innerHTML = `
+              <div class="text-center text-muted py-4">
+                <i class="bi bi-calendar-x icon-3rem"></i>
+                <p class="mt-2">No orders recorded yet.</p>
+              </div>
+            `;
+          } else {
+            let html = "";
+            dailyOrders.forEach((day) => {
+              const formattedDate = new Date(day.date).toLocaleDateString(
+                "en-US",
+                {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                }
+              );
+              html += `
+                <div class="daily-order-card card">
+                  <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>${formattedDate}</span>
+                    <div>
+                      <span class="badge bg-primary me-2">${
+                        day.orders.length
+                      } Orders</span>
+                      <span class="badge bg-success">₦${day.total.toLocaleString()}</span>
+                      <button class="btn btn-sm btn-view-order ms-2 view-day-orders" data-date="${
+                        day.date
+                      }">
+                        <i class="bi bi-eye"></i> View
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-sm">
+                        <thead>
+                          <tr>
+                            <th>Time</th>
+                            <th>Attendee</th>
+                            <th>Items</th>
+                            <th>Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+              `;
+
+              day.orders.forEach((order) => {
+                const itemsSummary = order.items
+                  .map((item) => `${item.name} (${item.quantity})`)
+                  .join(", ");
+                html += `
+                  <tr>
+                    <td>${order.time}</td>
+                    <td>${order.attendee}</td>
+                    <td>${itemsSummary}</td>
+                    <td>₦${order.total.toLocaleString()}</td>
+                  </tr>
+                `;
+              });
+
+              html += `
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              `;
+            });
+            dailyOrdersList.innerHTML = html;
+          }
+        }
+
+        function updateOrdersPage() {
+          if (dailyOrders.length === 0) {
+            allOrdersTableBody.innerHTML = `
+              <tr>
+                <td colspan="9" class="text-center text-muted py-4">
+                  <i class="bi bi-inbox icon-3rem"></i>
+                  <p class="mt-2">No orders found.</p>
+                </td>
+              </tr>
+            `;
+          } else {
+            let html = "";
+            dailyOrders.forEach((day) => {
+              day.orders.forEach((order) => {
+                const itemsSummary = order.items
+                  .map((item) => `${item.name} (${item.quantity})`)
+                  .join(", ");
+                html += `
+                  <tr>
+                    <td>${day.date}</td>
+                    <td>${order.time}</td>
+                    <td>${order.attendee}</td>
+                    <td>${order.paymentType}</td>
+                    <td>${itemsSummary}</td>
+                    <td>₦${order.subtotal.toLocaleString()}</td>
+                    <td>₦${order.discount.toLocaleString()}</td>
+                    <td>₦${order.total.toLocaleString()}</td>
+                    <td>
+                      <button class="btn btn-sm btn-view-order view-order-details" data-order-id="${
+                        order.id
+                      }" data-date="${day.date}">
+                        <i class="bi bi-eye"></i> Details
+                      </button>
+                    </td>
+                  </tr>
+                `;
+              });
+            });
+            allOrdersTableBody.innerHTML = html;
+          }
+        }
+
+        updateCurrentOrderUI();
+        updateDailyOrdersUI();
+      });
+    </script>
+  </body>
+</html>
