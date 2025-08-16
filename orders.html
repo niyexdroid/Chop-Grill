@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orders - CHOPS & GRILLS ENTERPRISE</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.cdnfonts.com/css/wistia-player-inter-numbers"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="shared/css/styles.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <i class="bi bi-shop"></i> CHOPS & GRILLS ENTERPRISE
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          title="Toggle navigation menu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">
+                <i class="bi bi-house-door"></i> Home
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="orders.html">
+                <i class="bi bi-receipt"></i> Orders
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="reports.html">
+                <i class="bi bi-graph-up"></i> Reports
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4 content-wrapper">
+      <div class="row">
+        <!-- Food Items Section -->
+        <div class="col-lg-5 mb-4">
+          <div class="card">
+            <div class="card-header">
+              <i class="bi bi-list-ul"></i> Food Menu
+            </div>
+            <div class="card-body food-menu-scroll">
+              <div class="food-category">Rice Dishes</div>
+              <div class="food-item" data-name="Jollof Rice" data-price="500">
+                <div class="d-flex justify-content-between">
+                  <span>Jollof Rice</span>
+                  <span class="badge bg-primary">₦500</span>
+                </div>
+              </div>
+              <div class="food-item" data-name="Fried Rice" data-price="700">
+                <div class="d-flex justify-content-between">
+                  <span>Fried Rice</span>
+                  <span class="badge bg-primary">₦700</span>
+                </div>
+              </div>
+              <div class="food-item" data-name="Spaghetti" data-price="500">
+                <div class="d-flex justify-content-between">
+                  <span>Spaghetti</span>
+                  <span class="badge bg-primary">₦500</span>
+                </div>
+              </div>
+              <div class="food-item" data-name="Basmati Rice" data-price="1000">
+                <div class="d-flex justify-content-between">
+                  <span>Basmati Rice</span>
+                  <span class="badge bg-primary">₦1,000</span>
+                </div>
+              </div>
+              <div class="food-item" data-name="Coconut Rice" data-price="700">
+                <div class="d-flex justify-content-between">
+                  <span>Coconut Rice</span>
+                  <span class="badge bg-primary">₦700</span>
+                </div>
+              </div>
+              <div
+                class="food-item"
+                data-name="White Rice & Curry Sauce"
+                data-price="2000"
+              >
+                <div class="d-flex justify-content-between">
+                  <span>White Rice & Curry Sauce</span>
+                  <span class="badge bg-primary">₦2,000</span>
+                </div>
+              </div>
+              <div class="food-item" data-name="Asun Rice" data-price="1000">
+                <div class="d-flex justify-content-between">
+                  <span>Asun Rice</span>
+                  <span class="badge bg-primary">₦1,000</span>
+                </div>
+              </div>
+              <div class="food-item" data-name="Potatoe Chips" data-price="500">
+                <div class="d-flex justify-content-between">
+                  <span>Potatoe Chips</span>
+                  <span class="badge bg-primary">₦500</span>
+                </div>
+              </div>
+              <div class="food-item" data-name="Creamy Pasta" data-price="1000">
+                <div class="d-flex justify-content-between">
+                  <span>Creamy Pasta</span>
+                  <span class="badge bg-primary">₦1,000</span>
+                </div>
+              </div>
+
+              <div class="food-category">Meat & Protein</div>
+              <div class="food-item" data-name="Beef (2 pcs)" data-price="500">
+                <div class="d-flex justify-content-between">
+                  <span>Beef (2 pcs)</span>
+                  <span class="badge bg-primary">₦500</span>
+                </div>
+              </div>
+              <div class="food-item" data-name="Beef (1 pc)" data-price="300">
+                <div class="d-flex justify-content-between">
+                  <span>Beef (1 pc)</span>
+                  <span class="badge bg-primary">₦300</span>
+                </div>
+              </div>
+              <div class="food-item" data-name="Moimoi" data-price="500">
+                <div class="d-flex justify-content-between">
+                  <span>Moimoi</span>
+                  <span class="badge bg-primary">₦500</span>
+                </div>
+              </div>
+              <div class="food-item" data-name="Goat Meat" data-price="500">
+                <div class="d-flex justify-content-between">
+                  <span>Goat Meat</span>
+                  <span class="badge bg-primary">₦500</span>
+                </div>
+              </div>
+              <div
+                class="food-item"
+                data-name="Moimoi (with egg)"
+                data-price="1000"
+              >
+                <div class="d-flex justify-content-between">
+                  <span>Moimoi (with egg)</span>
+                  <span class="badge bg-primary">₦1,000</span>
+                </div>
+              </div>
+              <div class="food-item" data-name="Goat Meat" data-price="1000">
+                <div class="d-flex justify-content-between">
+                  <span>Goat Meat</span>
+                  <span class="badge bg-primary">₦1,000</span>
+                </div>
+              </div>
+              <div class="food-item" data-name="Assorted Meat" data-price="500">
+                <div class="d-flex justify-content-between">
+                  <span>Assorted Meat</span>
+                  <span class="badge bg-primary">₦500</span>
+                </div>
+              </div>
+              <div class="food-item" data-name="Gizzard" data-price="500">
+                <div class="d-flex justify-content-between">
+                  <span>Gizzard</span>
+                  <span class="badge bg-primary">₦500</span>
+                </div>
+              </div>
+              <div class="food-item" data-name="Egg" data-price="300">
+                <div class="d-flex justify-content-between">
+                  <span>Egg</span>
+                  <span class="badge bg-primary">₦300</span>
+                </div>
+              </div>
+              <div class="food-item" data-name="Plantain" data-price="500">
+                <div class="d-flex justify-content-between">
+                  <span>Plantain</span>
+                  <span class="badge bg-primary">₦500</span>
+                </div>
+              </div>
+              <div class="food-item" data-name="Coleslaw" data-price="500">
+                <div class="d-flex justify-content-between">
+                  <span>Coleslaw</span>
+                  <span class="badge bg-primary">₦500</span>
+                </div>
+              </div>
+
+              <div class="food-category">Chicken & Turkey</div>
+              <div
+                class="food-item"
+                data-name="Chicken (Large)"
+                data-price="3500"
+              >
+                <div class="d-flex justify-content-between">
+                  <span>Chicken (Large)</span>
+                  <span class="badge bg-primary">₦3,500</span>
+                </div>
+              </div>
+              <div
+                class="food-item"
+                data-name="Chicken (Medium)"
+                data-price="3000"
+              >
+                <div class="d-flex justify-content-between">
+                  <span>Chicken (Medium)</span>
+                  <span class="badge bg-primary">₦3,000</span>
+                </div>
+              </div>
+              <div
+                class="food-item"
+                data-name="Chicken (Small)"
+                data-price="2500"
+              >
+                <div class="d-flex justify-content-between">
+                  <span>Chicken (Small)</span>
+                  <span class="badge bg-primary">₦2,500</span>
+                </div>
+              </div>
+              <div class="food-item" data-name="Turkey wing" data-price="5000">
+                <div class="d-flex justify-content-between">
+                  <span>Turkey wing</span>
+                  <span class="badge bg-primary">₦5,000</span>
+                </div>
+              </div>
+              <div
+                class="food-item"
+                data-name="Turkey (Large)"
+                data-price="4000"
+              >
+                <div class="d-flex justify-content-between">
+                  <span>Turkey (Large)</span>
+                  <span class="badge bg-primary">₦4,000</span>
+                </div>
+              </div>
+              <div
+                class="food-item"
+                data-name="Turkey (Medium)"
+                data-price="3500"
+              >
+                <div class="d-flex justify-content-between">
+                  <span>Turkey (Medium)</span>
+                  <span class="badge bg-primary">₦3,500</span>
+                </div>
+              </div>
+              <div
+                class="food-item"
+                data-name="Turkey (Small)"
+                data-price="3000"
+              >
+                <div class="d-flex justify-content-between">
+                  <span>Turkey (Small)</span>
+                  <span class="badge bg-primary">₦3,000</span>
+                </div>
+              </div>
+              <div
+                class="food-item"
+                data-name="Chicken & Chips"
+                data-price="4000"
+              >
+                <div class="d-flex justify-content-between">
+                  <span>Chicken & Chips</span>
+                  <span class="badge bg-primary">₦4,000</span>
+                </div>
+              </div>
+
+              <div class="food-category">Fish</div>
+              <div
+                class="food-item"
+                data-name="Fried Fish (Large)"
+                data-price="2000"
+              >
+                <div class="d-flex justify-content-between">
+                  <span>Fried Fish (Large)</span>
+                  <span class="badge bg-primary">₦2,000</span>
+                </div>
+              </div>
+              <div
+                class="food-item"
+                data-name="Fried Fish (Medium)"
+                data-price="1500"
+              >
+                <div class="d-flex justify-content-between">
+                  <span>Fried Fish (Medium)</span>
+                  <span class="badge bg-primary">₦1,500</span>
+                </div>
+              </div>
+              <div
+                class="food-item"
+                data-name="Catfish BBQ (Large)"
+                data-price="12000"
+              >
+                <div class="d-flex justify-content-between">
+                  <span>Catfish BBQ (Large)</span>
+                  <span class="badge bg-primary">₦12,000</span>
+                </div>
+              </div>
+              <div
+                class="food-item"
+                data-name="Catfish BBQ (Medium)"
+                data-price="10000"
+              >
+                <div class="d-flex justify-content-between">
+                  <span>Catfish BBQ (Medium)</span>
+                  <span class="badge bg-primary">₦10,000</span>
+                </div>
+              </div>
+              <div
+                class="food-item"
+                data-name="Catfish BBQ (Small)"
+                data-price="9000"
+              >
+                <div class="d-flex justify-content-between">
+                  <span>Catfish BBQ (Small)</span>
+                  <span class="badge bg-primary">₦9,000</span>
+                </div>
+              </div>
+              <div
+                class="food-item"
+                data-name="Croaker Fish (Large)"
+                data-price="12000"
+              >
+                <div class="d-flex justify-content-between">
+                  <span>Croaker Fish (Large)</span>
+                  <span class="badge bg-primary">₦12,000</span>
+                </div>
+              </div>
+              <div
+                class="food-item"
+                data-name="Croaker Fish (Medium)"
+                data-price="10000"
+              >
+                <div class="d-flex justify-content-between">
+                  <span>Croaker Fish (Medium)</span>
+                  <span class="badge bg-primary">₦10,000</span>
+                </div>
+              </div>
+              <div
+                class="food-item"
+                data-name="Croaker Fish (Small)"
+                data-price="9000"
+              >
+                <div class="d-flex justify-content-between">
+                  <span>Croaker Fish (Small)</span>
+                  <span class="badge bg-primary">₦9,000</span>
+                </div>
+              </div>
+
+              <div class="food-category">Drinks</div>
+              <div
+                class="food-item"
+                data-name="Coke, Fanta, Sprite, Pepsi"
+                data-price="500"
+              >
+                <div class="d-flex justify-content-between">
+                  <span>Coke, Fanta, Sprite, Pepsi</span>
+                  <span class="badge bg-primary">₦500</span>
+                </div>
+              </div>
+              <div class="food-item" data-name="Schweppes" data-price="500">
+                <div class="d-flex justify-content-between">
+                  <span>Schweppes</span>
+                  <span class="badge bg-primary">₦500</span>
+                </div>
+              </div>
+              <div class="food-item" data-name="Fearless" data-price="700">
+                <div class="d-flex justify-content-between">
+                  <span>Fearless</span>
+                  <span class="badge bg-primary">₦700</span>
+                </div>
+              </div>
+              <div class="food-item" data-name="Predator" data-price="600">
+                <div class="d-flex justify-content-between">
+                  <span>Predator</span>
+                  <span class="badge bg-primary">₦600</span>
+                </div>
+              </div>
+              <div class="food-item" data-name="5Alive Pet" data-price="800">
+                <div class="d-flex justify-content-between">
+                  <span>5Alive Pet</span>
+                  <span class="badge bg-primary">₦800</span>
+                </div>
+              </div>
+              <div class="food-item" data-name="Bottle Water" data-price="200">
+                <div class="d-flex justify-content-between">
+                  <span>Bottle Water</span>
+                  <span class="badge bg-primary">₦200</span>
+                </div>
+              </div>
+
+              <div class="food-category">Takeaway & Extras</div>
+              <div class="food-item" data-name="Takeaway Big" data-price="200">
+                <div class="d-flex justify-content-between">
+                  <span>Takeaway Big</span>
+                  <span class="badge bg-primary">₦200</span>
+                </div>
+              </div>
+              <div
+                class="food-item"
+                data-name="Takeaway Small"
+                data-price="100"
+              >
+                <div class="d-flex justify-content-between">
+                  <span>Takeaway Small</span>
+                  <span class="badge bg-primary">₦100</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order Section -->
+        <div class="col-lg-7">
+          <div class="card">
+            <div
+              class="card-header d-flex justify-content-between align-items-center"
+            >
+              <span><i class="bi bi-cart-plus"></i> Current Order</span>
+              <button
+                id="completeOrderBtn"
+                class="btn btn-complete-order btn-sm"
+              >
+                <i class="bi bi-check-circle"></i> Complete Order
+              </button>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <label for="attendeeSelect" class="form-label"
+                  >Select Attendee:</label
+                >
+                <select id="attendeeSelect" class="form-select attendee-select">
+                  <option value="">Select an attendee</option>
+                  <option value="Gift">Gift</option>
+                  <option value="Promise">Promise</option>
+                  <option value="Chioma">Chioma</option>
+                  <option value="Joy">Joy</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="paymentTypeSelect" class="form-label"
+                  >Payment Type:</label
+                >
+                <select
+                  id="paymentTypeSelect"
+                  class="form-select payment-type-select"
+                >
+                  <option value="">Select payment type</option>
+                  <option value="POS">POS</option>
+                  <option value="Cash">Cash</option>
+                  <option value="Bank transfer">Bank transfer</option>
+                </select>
+              </div>
+
+              <div id="currentOrderItems">
+                <div class="text-center text-muted py-4">
+                  <i class="bi bi-cart-x icon-3rem"></i>
+                  <p class="mt-2">
+                    No items in order. Select items from the menu.
+                  </p>
+                </div>
+              </div>
+
+              <div class="order-summary">
+                <div class="d-flex justify-content-between">
+                  <span>Subtotal:</span>
+                  <span id="subtotal">₦0</span>
+                </div>
+                <div class="d-flex justify-content-between mt-2">
+                  <span>Discount:</span>
+                  <select
+                    id="discountSelect"
+                    class="discount-select"
+                    title="Select discount amount"
+                  >
+                    <option value="0">None</option>
+                    <option value="100">₦100</option>
+                    <option value="200">₦200</option>
+                    <option value="300">₦300</option>
+                    <option value="400">₦400</option>
+                    <option value="500">₦500</option>
+                    <option value="1000">₦1,000</option>
+                  </select>
+                </div>
+                <div class="d-flex justify-content-between mt-2">
+                  <span>Discount Amount:</span>
+                  <span id="discountAmount">₦0</span>
+                </div>
+                <hr />
+                <div class="d-flex justify-content-between fw-bold">
+                  <span>Total:</span>
+                  <span id="total">₦0</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Daily Orders Section -->
+          <div class="card mt-4">
+            <div
+              class="card-header d-flex justify-content-between align-items-center"
+            >
+              <span><i class="bi bi-calendar-check"></i> Daily Orders</span>
+              <div class="export-buttons">
+                <button id="exportExcelBtn" class="btn btn-export-excel btn-sm">
+                  <i class="bi bi-file-earmark-excel"></i> Export Excel
+                </button>
+                <button id="exportPdfBtn" class="btn btn-export-pdf btn-sm">
+                  <i class="bi bi-file-earmark-pdf"></i> Export PDF
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div id="dailyOrdersList">
+                <div class="text-center text-muted py-4">
+                  <i class="bi bi-calendar-x icon-3rem"></i>
+                  <p class="mt-2">No orders recorded yet.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- All Orders Section -->
+          <div class="card mt-4">
+            <div
+              class="card-header d-flex justify-content-between align-items-center"
+            >
+              <span><i class="bi bi-receipt"></i> All Orders</span>
+              <div class="export-buttons">
+                <button
+                  id="exportOrdersExcelBtn"
+                  class="btn btn-export-excel btn-sm"
+                >
+                  <i class="bi bi-file-earmark-excel"></i> Export Excel
+                </button>
+                <button
+                  id="exportOrdersPdfBtn"
+                  class="btn btn-export-pdf btn-sm"
+                >
+                  <i class="bi bi-file-earmark-pdf"></i> Export PDF
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Time</th>
+                      <th>Attendee</th>
+                      <th>Payment Type</th>
+                      <th>Items</th>
+                      <th>Subtotal</th>
+                      <th>Discount</th>
+                      <th>Total</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="allOrdersTableBody">
+                    <tr>
+                      <td colspan="9" class="text-center text-muted py-4">
+                        <i class="bi bi-inbox icon-3rem"></i>
+                        <p class="mt-2">No orders found.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <p class="mb-0">Niyexdroid Technologies ©2025</p>
+      </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div class="toast-container"></div>
+
+    <!-- Hidden PDF Container -->
+    <div id="pdfContainer" class="pdf-container"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="shared/js/utils.js"></script>
+    <script src="shared/js/orders.js"></script>
+  </body>
+</html>
